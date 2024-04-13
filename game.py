@@ -170,6 +170,7 @@ class Game:
                     if event.key == pygame.K_f:
                         self.shuffle_mode = False
 
+
                     if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
                         self.shift_mode = False
                     if event.key == pygame.K_LALT or event.key == pygame.K_RALT:
