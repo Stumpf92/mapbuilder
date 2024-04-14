@@ -28,6 +28,13 @@ class Mouse:
         game.map.del_tile_square(game, self.last_right_click_position_grid, (self.pos_x_grid,self.pos_y_grid))
         self.right_click_mode = False
 
+
+    def wheel_up(self, game):
+        game.grid_size = max(game.grid_size -1 , game.min_grid_size)
+
+    def wheel_down(self, game):
+        game.grid_size = min(game.grid_size +1 , game.max_grid_size)
+
     def update(self, game):
         self.pos_x_px = pygame.mouse.get_pos()[0]
         self.pos_y_px = pygame.mouse.get_pos()[1]

@@ -18,6 +18,8 @@ class Game:
 
         self.screen_width = 1800   
         self.screen_height = 1000
+        self.max_grid_size = 48
+        self.min_grid_size = 4
         self.grid_size = 12
         self.camera_offset = [-self.screen_width/2 ,-self.screen_height/2]
 
@@ -63,6 +65,7 @@ class Game:
         self.player.real_pos_pixel = [0,0]
         self.player.pos_pixel = [0,0]
         self.player.pos_grid = [0,0]
+        self.grid_size = 4
         self.camera.center(self, self.player)
         self.map.reset(self)
     
@@ -184,12 +187,17 @@ class Game:
                         self.mouse.left_click_down(self)
                     if event.button == 3:
                         self.mouse.right_click_down(self)
+                    if event.button == 4:
+                        self.mouse.wheel_up(self)
+                    if event.button == 5:
+                        self.mouse.wheel_down(self)
                 
                 if event.type == pygame.MOUSEBUTTONUP:
                     if event.button == 1:
                         self.mouse.left_click_up(self)
                     if event.button == 3:
                         self.mouse.right_click_up(self)
+                    
 
             self.screen.blit(self.surface,(0,0))
             pygame.display.update()

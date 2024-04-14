@@ -20,7 +20,6 @@ class Map:
         if game.shuffle_mode == True:
             self.add_random_single_tile(1)
 
-    @timeit
     def render(self, game):
         for tile in self.tilemap:
             x , y = int(tile.split(';')[0]) , int(tile.split(';')[1])
@@ -75,7 +74,6 @@ class Map:
 
         #self.update_max_values()
     
-    @timeit
     def update_max_values(self):
         self.min_x_grid = 0
         self.max_x_grid = 0
