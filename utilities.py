@@ -1,4 +1,6 @@
 import pygame
+from functools import wraps
+import time
 
 def draw_origin(game):
     pygame.draw.line(game.surface,(255,0,0),(-game.grid_size -game.camera.pos[0],0-game.camera.pos[1]),(game.grid_size -game.camera.pos[0],0-game.camera.pos[1]),3)
@@ -25,6 +27,9 @@ def draw_data(game):
     text = game.data_font.render(mousepos, 1, (255,255,255))
     game.surface.blit(text,(10,50))
 
+    tileamount = 'amount of tiles:   ' + str(len(game.map.tilemap.keys()))
+    text = game.data_font.render(tileamount, 1, (255,255,255))
+    game.surface.blit(text,(10,60))
 
 def grid_go_up(a,tilemap):
     temp = a[1] - 1
@@ -61,3 +66,14 @@ def grid_go_right(a,tilemap):
         string = str(temp) +';'+ str(a[1])
     sol = [temp,a[1]]
     return sol
+
+def timeit(func):
+    @wraps(func)
+    def timeit_wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        total_time = end_time - start_time
+        print(f'Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds')
+        return result
+    return timeit_wrapper

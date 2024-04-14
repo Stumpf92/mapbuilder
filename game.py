@@ -60,6 +60,7 @@ class Game:
         self.mouse = Mouse(self)
 
     def reset(self):
+        self.player.real_pos_pixel = [0,0]
         self.player.pos_pixel = [0,0]
         self.player.pos_grid = [0,0]
         self.camera.center(self, self.player)
@@ -144,7 +145,7 @@ class Game:
                     if event.key == pygame.K_F5:
                         self.map.save()
                     if event.key == pygame.K_F8:
-                        self.map.load()
+                        self.map.load(self)
                     if event.key == pygame.K_r:
                         self.reset()
                     if event.key == pygame.K_SPACE:
@@ -180,11 +181,15 @@ class Game:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        self.mouse.left_click(self)
+                        self.mouse.left_click_down(self)
+                    if event.button == 3:
+                        self.mouse.right_click_down(self)
                 
                 if event.type == pygame.MOUSEBUTTONUP:
                     if event.button == 1:
-                        self.map.add_tile_square(self.mouse.last_left_click_position_grid, (self.mouse.pos_x_grid,self.mouse.pos_y_grid),1)
+                        self.mouse.left_click_up(self)
+                    if event.button == 3:
+                        self.mouse.right_click_up(self)
 
             self.screen.blit(self.surface,(0,0))
             pygame.display.update()
